@@ -7,26 +7,31 @@ import collections
 
 excel_data_df = pandas.read_excel(r'wine3.xlsx',
                                   sheet_name='katalog',
-                                  usecols=['Категория','Название','Сорт', 'Цена', 'Картинка','Акция'],
+                                  usecols=['Категория',
+                                           'Название',
+                                           'Сорт',
+                                           'Цена',
+                                           'Картинка',
+                                           'Акция'],
                                   na_values=True,
                                   keep_default_na='')
-payload = {val1: val2.to_dict(orient='records') for val1,val2 in excel_data_df.groupby("Категория")}
+payload = {val1: val2.to_dict(orient='records') for val1, val2 in excel_data_df.groupby("Категория")}
 katalog = collections.Counter(payload)
 
 
 def year_format(how_old):
     if how_old > 100:
-        if (how_old % 100) in (11,12,13,14):
+        if (how_old % 100) in (11, 12, 13, 14):
             return f'{how_old} лет'
-        elif (how_old % 10) in (5,6,7,8,9,0):
+        elif (how_old % 10) in (5, 6, 7, 8, 9, 0):
             return f'{how_old} лет'
         elif (how_old % 10) == 1:
             return f'{how_old} год'
-        elif (how_old % 10) in (2,3,4):
+        elif (how_old % 10) in (2, 3, 4):
             return f'{how_old} года'
-    elif how_old in (10,11,12,13,14):
+    elif how_old in (10, 11, 12, 13, 14):
         return f'{how_old} лет'
-    elif (how_old % 10) in (5,6,вв7,8,9,0):
+    elif (how_old % 10) in (5, 6, 7, 8, 9, 0):
         return f'{how_old} лет'
     elif (how_old % 10) == 1:
         return f'{how_old} год'
