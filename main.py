@@ -45,6 +45,7 @@ env = Environment(
 )
 
 template = env.get_template('template.html')
+
 how_old = datetime.datetime.now().year - 1920
 
 rendered_page = template.render(
